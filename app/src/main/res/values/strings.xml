@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">朝会ジェネレーター</string>
+    <string name="tab_generator">ジェネレーター</string>
+    <string name="tab_history">トピック一覧</string>
+    <string name="tab_settings">設定</string>
+    <string name="select_category">カテゴリを選択</string>
+    <string name="category_all">すべて</string>
+    <string name="generate_topic">トピックを生成する</string>
+    <string name="about_app">アプリについて</string>
+    <string name="about_description">朝会ジェネレーターは、チームの朝会で使えるトピックをランダムに生成するアプリです。アイスブレイクやチームビルディングに活用してください。</string>
+    <string name="version_label">バージョン</string>
+    <string name="topic_count_label">トピック数</string>
+    <string name="topic_count_value">%d 個のトピック</string>
+    <string name="no_history">まだ履歴がありません</string>
+</resources>
