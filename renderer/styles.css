@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Meiryo', 'Yu Gothic', sans-serif;
+  background-color: #f0f4f8;
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px 40px;
+}
+
+/* ヘッダー */
+.header {
+  text-align: center;
+  padding: 24px 0 16px;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #2b6cb0;
+  font-weight: 700;
+}
+
+.header .date {
+  font-size: 14px;
+  color: #718096;
+  margin-top: 4px;
+}
+
+/* フォーム */
+.form-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.form-section h2 {
+  font-size: 18px;
+  color: #2d3748;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+/* 体調セレクター */
+.condition-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.condition-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #4a5568;
+}
+
+.condition-btn:hover {
+  border-color: #4299e1;
+  background: #ebf8ff;
+}
+
+.condition-btn.selected {
+  border-color: #4299e1;
+  background: #4299e1;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 送信ボタン */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4299e1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.submit-btn:hover {
+  background: #3182ce;
+}
+
+.submit-btn:active {
+  background: #2b6cb0;
+}
+
+/* エントリ一覧 */
+.entries-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.entries-section h2 {
+  font-size: 18px;
+  color: #2d3748;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.empty-message {
+  text-align: center;
+  color: #a0aec0;
+  padding: 32px 0;
+  font-size: 14px;
+}
+
+/* エントリカード */
+.entry-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.2s;
+}
+
+.entry-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.entry-card:last-child {
+  margin-bottom: 0;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.entry-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2b6cb0;
+}
+
+.entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.entry-condition {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.entry-condition.great {
+  background: #c6f6d5;
+  color: #276749;
+}
+
+.entry-condition.good {
+  background: #bee3f8;
+  color: #2a4365;
+}
+
+.entry-condition.normal {
+  background: #fefcbf;
+  color: #744210;
+}
+
+.entry-condition.bad {
+  background: #fed7d7;
+  color: #9b2c2c;
+}
+
+.entry-date {
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+.entry-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entry-item {
+  font-size: 13px;
+}
+
+.entry-item-label {
+  font-weight: 600;
+  color: #718096;
+  margin-right: 6px;
+}
+
+.entry-item-text {
+  color: #4a5568;
+  white-space: pre-wrap;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #cbd5e0;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  color: #e53e3e;
+  background: #fff5f5;
+}

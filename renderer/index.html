@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'" />
+  <title>朝会アプリ</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>朝会アプリ</h1>
+      <p class="date" id="today-date"></p>
+    </header>
+
+    <main class="main">
+      <!-- 入力フォーム -->
+      <section class="form-section">
+        <h2>今日の共有事項</h2>
+        <form id="entry-form">
+          <div class="form-group">
+            <label for="name">名前</label>
+            <input type="text" id="name" placeholder="名前を入力" required />
+          </div>
+
+          <div class="form-group">
+            <label for="yesterday">昨日やったこと</label>
+            <textarea id="yesterday" rows="3" placeholder="昨日の作業内容を入力"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="today">今日やること</label>
+            <textarea id="today" rows="3" placeholder="今日の予定を入力"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="troubles">困っていること・共有事項</label>
+            <textarea id="troubles" rows="3" placeholder="困りごとや共有したいことを入力"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="condition">今日の体調・気分</label>
+            <div class="condition-selector" id="condition-selector">
+              <button type="button" class="condition-btn" data-value="great">絶好調</button>
+              <button type="button" class="condition-btn" data-value="good">良い</button>
+              <button type="button" class="condition-btn selected" data-value="normal">普通</button>
+              <button type="button" class="condition-btn" data-value="bad">いまいち</button>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">登録する</button>
+        </form>
+      </section>
+
+      <!-- エントリ一覧 -->
+      <section class="entries-section">
+        <h2>共有一覧</h2>
+        <div id="entries-list" class="entries-list">
+          <p class="empty-message">まだ登録がありません</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
