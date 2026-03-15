@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { agendaTemplates } from '../data/topics'
+import { agendaTemplates, checkInQuestions, icebreakers } from '../data/topics'
 import Timer from './Timer'
 
 interface AgendaItem {
@@ -16,11 +16,25 @@ export default function AgendaRunner() {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null)
   const [isRunning, setIsRunning] = useState(false)
 
+  const getPromptForItem = useCallback((index: number): string | null => {
+    const item = agendaTemplates[index]
+    if (item.label === '体調チェック') {
+      return checkInQuestions[Math.floor(Math.random() * checkInQuestions.length)]
+    }
+    if (item.label === 'アイスブレイク') {
+      return icebreakers[Math.floor(Math.random() * icebreakers.length)]
+    }
+    return null
+  }, [])
+
+  const [currentPrompt, setCurrentPrompt] = useState<string | null>(null)
+
   const startMeeting = useCallback(() => {
     setItems(agendaTemplates.map(t => ({ ...t, completed: false })))
     setCurrentIndex(0)
+    setCurrentPrompt(getPromptForItem(0))
     setIsRunning(true)
-  }, [])
+  }, [getPromptForItem])
 
   const handleTimerComplete = useCallback(() => {
     setItems(prev =>
@@ -33,11 +47,13 @@ export default function AgendaRunner() {
       const next = prev + 1
       if (next >= items.length) {
         setIsRunning(false)
+        setCurrentPrompt(null)
         return null
       }
+      setCurrentPrompt(getPromptForItem(next))
       return next
     })
-  }, [currentIndex, items.length])
+  }, [currentIndex, items.length, getPromptForItem])
 
   const skipItem = useCallback(() => {
     handleTimerComplete()
@@ -46,6 +62,7 @@ export default function AgendaRunner() {
   const resetMeeting = useCallback(() => {
     setItems(agendaTemplates.map(t => ({ ...t, completed: false })))
     setCurrentIndex(null)
+    setCurrentPrompt(null)
     setIsRunning(false)
   }, [])
 
@@ -80,6 +97,9 @@ export default function AgendaRunner() {
           <p className="current-label">
             {items[currentIndex].icon} {items[currentIndex].label}
           </p>
+          {currentPrompt && (
+            <p className="current-prompt">💬 {currentPrompt}</p>
+          )}
           <Timer
             minutes={items[currentIndex].duration}
             onComplete={handleTimerComplete}

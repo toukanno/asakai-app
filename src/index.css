@@ -250,6 +250,15 @@ button, textarea, input {
   margin-bottom: 12px;
 }
 
+.current-prompt {
+  font-size: 1rem;
+  color: var(--primary);
+  background: rgba(245, 158, 11, 0.08);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
 .agenda-controls {
   display: flex;
   gap: 8px;
