@@ -2,10 +2,14 @@
   "name": "@asakai/desktop",
   "version": "1.0.0",
   "description": "朝会ジェネレーター - Morning Meeting Generator Desktop App",
+  "author": "toukanno",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
+    "build:win": "tsc && vite build && electron-builder --win",
+    "build:mac": "tsc && vite build && electron-builder --mac",
+    "build:msix": "tsc && vite build && electron-builder --win appx",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "electron:dev": "vite build && electron ."
@@ -27,7 +31,7 @@
     "vite-plugin-electron-renderer": "^0.14.6"
   },
   "build": {
-    "appId": "com.asakai.app",
+    "appId": "com.toukanno.asakai",
     "productName": "朝会ジェネレーター",
     "files": [
       "dist/**/*",
@@ -37,10 +41,25 @@
       "output": "release"
     },
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "category": "public.app-category.business"
     },
     "win": {
-      "target": "nsis"
+      "target": ["nsis", "appx"]
+    },
+    "appx": {
+      "identityName": "toukanno.AsakaiGenerator",
+      "applicationId": "AsakaiGenerator",
+      "publisher": "CN=toukanno",
+      "publisherDisplayName": "toukanno",
+      "displayName": "朝会ジェネレーター",
+      "languages": ["ja-JP", "en-US"],
+      "showNameOnTiles": true
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false
     },
     "linux": {
       "target": "AppImage"

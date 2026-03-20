@@ -9,17 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
-    strategy:
-      matrix:
-        include:
-          - os: windows-latest
-            platform: win
-            artifact: "packages/desktop/release/*.exe"
-          - os: macos-latest
-            platform: mac
-            artifact: "packages/desktop/release/*.dmg"
-    runs-on: ${{ matrix.os }}
+  release-windows:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,15 +18,39 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm install
-      - name: Build desktop
+      - name: Build Windows (NSIS + MSIX)
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: false
         run: |
           cd packages/desktop
           npx vite build
-          npx electron-builder --${{ matrix.platform }} --publish never
+          npx electron-builder --win --publish never
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ matrix.artifact }}
+          files: |
+            packages/desktop/release/*.exe
+            packages/desktop/release/*.appx
+          draft: false
+
+  release-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - name: Build macOS DMG
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
+        run: |
+          cd packages/desktop
+          npx vite build
+          npx electron-builder --mac --publish never
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: packages/desktop/release/*.dmg
           draft: false
