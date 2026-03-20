@@ -88,6 +88,7 @@ export default function AgendaRunner() {
             {items[currentIndex].icon} {items[currentIndex].label}
           </p>
           <Timer
+            key={`${currentIndex}-${items[currentIndex].label}`}
             minutes={items[currentIndex].duration}
             onComplete={handleTimerComplete}
             isActive={isRunning && !isPaused}
