@@ -15,11 +15,13 @@ export default function AgendaRunner() {
   )
   const [currentIndex, setCurrentIndex] = useState<number | null>(null)
   const [isRunning, setIsRunning] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
 
   const startMeeting = useCallback(() => {
     setItems(agendaTemplates.map(t => ({ ...t, completed: false })))
     setCurrentIndex(0)
     setIsRunning(true)
+    setIsPaused(false)
   }, [])
 
   const handleTimerComplete = useCallback(() => {
@@ -47,6 +49,11 @@ export default function AgendaRunner() {
     setItems(agendaTemplates.map(t => ({ ...t, completed: false })))
     setCurrentIndex(null)
     setIsRunning(false)
+    setIsPaused(false)
+  }, [])
+
+  const togglePause = useCallback(() => {
+    setIsPaused(prev => !prev)
   }, [])
 
   const totalMinutes = items.reduce((sum, item) => sum + item.duration, 0)
@@ -83,11 +90,16 @@ export default function AgendaRunner() {
           <Timer
             minutes={items[currentIndex].duration}
             onComplete={handleTimerComplete}
-            isActive={isRunning}
+            isActive={isRunning && !isPaused}
           />
-          <button className="btn btn-secondary" onClick={skipItem}>
-            スキップ ⏭
-          </button>
+          <div className="member-controls">
+            <button className="btn btn-secondary" onClick={togglePause}>
+              {isPaused ? '▶ 再開' : '⏸ 停止'}
+            </button>
+            <button className="btn btn-secondary" onClick={skipItem}>
+              スキップ ⏭
+            </button>
+          </div>
         </div>
       )}
 
