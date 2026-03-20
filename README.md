@@ -1,14 +1,39 @@
 # asakai-app
 
-朝会ジェネレーター
+朝会ジェネレーター - Morning Meeting Generator
 
-## Branches
+## 構成
 
-- `work`: メインの開発ブランチ
-- `platform/ios`: iOS版向けの開発ブランチ
+モノレポ構成（npm workspaces）で、デスクトップ版とモバイル版を管理しています。
 
-## iOS版の進め方（最小運用）
+```
+packages/
+├── shared/    # 共有データ・ロジック（hooks, types, data）
+├── desktop/   # Electron デスクトップアプリ（Windows / Mac / Linux）
+└── mobile/    # React Native モバイルアプリ（iOS）
+```
 
-1. `platform/ios` ブランチで iOS対応の実装を行う
-2. まとまりごとに PR を作成してレビューする
-3. 必要に応じて `work` から定期的に取り込む
+## セットアップ
+
+```bash
+npm install
+```
+
+## デスクトップアプリ（Electron）
+
+```bash
+# 開発
+npm run dev -w @asakai/desktop
+
+# ビルド
+npm run build -w @asakai/desktop
+```
+
+## モバイルアプリ（React Native）
+
+```bash
+# iOS
+cd packages/mobile
+npx pod-install
+npx react-native run-ios
+```

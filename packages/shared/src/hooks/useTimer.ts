@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 
-interface TimerProps {
+interface UseTimerOptions {
   minutes: number
   onComplete: () => void
   isActive: boolean
 }
 
-export default function Timer({ minutes, onComplete, isActive }: TimerProps) {
+export function useTimer({ minutes, onComplete, isActive }: UseTimerOptions) {
   const [secondsLeft, setSecondsLeft] = useState(minutes * 60)
   const totalSeconds = minutes * 60
 
@@ -41,12 +41,11 @@ export default function Timer({ minutes, onComplete, isActive }: TimerProps) {
   const isWarning = secondsLeft <= 30 && secondsLeft > 0
   const isExpired = secondsLeft === 0
 
-  return (
-    <div className={`timer ${isWarning ? 'timer-warning' : ''} ${isExpired ? 'timer-expired' : ''}`}>
-      <div className="timer-display">{formatTime(secondsLeft)}</div>
-      <div className="timer-bar">
-        <div className="timer-bar-fill" style={{ width: `${progress}%` }} />
-      </div>
-    </div>
-  )
+  return {
+    secondsLeft,
+    formattedTime: formatTime(secondsLeft),
+    progress,
+    isWarning,
+    isExpired,
+  }
 }

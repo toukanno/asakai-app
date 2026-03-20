@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { icebreakers } from '../data/topics'
 
-export default function IceBreaker() {
+export function useIceBreaker() {
   const [topic, setTopic] = useState<string | null>(null)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -18,19 +18,9 @@ export default function IceBreaker() {
     }, 80)
   }, [])
 
-  return (
-    <div className="icebreaker-card">
-      <h3>🧊 アイスブレイク</h3>
-      <div className={`topic-display ${isAnimating ? 'shuffling' : ''}`}>
-        {topic || 'ボタンを押してお題を生成！'}
-      </div>
-      <button
-        className="btn btn-primary"
-        onClick={generateTopic}
-        disabled={isAnimating}
-      >
-        {isAnimating ? 'シャッフル中...' : '🎲 お題を生成'}
-      </button>
-    </div>
-  )
+  return {
+    topic,
+    isAnimating,
+    generateTopic,
+  }
 }
