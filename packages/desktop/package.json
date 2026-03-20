@@ -15,6 +15,7 @@
     "electron:dev": "vite build && electron ."
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "@asakai/shared": "*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -45,7 +46,10 @@
       "category": "public.app-category.business"
     },
     "win": {
-      "target": ["nsis", "appx"]
+      "target": [
+        "nsis",
+        "appx"
+      ]
     },
     "appx": {
       "identityName": "toukanno.AsakaiGenerator",
@@ -53,7 +57,10 @@
       "publisher": "CN=toukanno",
       "publisherDisplayName": "toukanno",
       "displayName": "朝会ジェネレーター",
-      "languages": ["ja-JP", "en-US"],
+      "languages": [
+        "ja-JP",
+        "en-US"
+      ],
       "showNameOnTiles": true
     },
     "nsis": {

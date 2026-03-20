@@ -1,5 +1,6 @@
 import { useAgenda } from '@asakai/shared'
 import Timer from './Timer'
+import AIFacilitator from './AIFacilitator'
 
 export default function AgendaRunner() {
   const {
@@ -50,6 +51,7 @@ export default function AgendaRunner() {
             onComplete={handleTimerComplete}
             isActive={isRunning && !isPaused}
           />
+          <AIFacilitator agendaItem={items[currentIndex].label} />
           <div className="member-controls">
             <button className="btn btn-secondary" onClick={togglePause}>
               {isPaused ? '▶ 再開' : '⏸ 停止'}

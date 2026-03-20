@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import path from 'node:path'
+import { registerAIHandlers } from './ai'
 
 const DIST = path.join(__dirname, '../dist')
 const VITE_DEV_SERVER_URL = process.env.VITE_DEV_SERVER_URL
@@ -24,6 +25,8 @@ function createWindow() {
     win.loadFile(path.join(DIST, 'index.html'))
   }
 }
+
+registerAIHandlers()
 
 app.whenReady().then(createWindow)
 

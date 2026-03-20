@@ -2,8 +2,9 @@ import { useState } from 'react'
 import IceBreaker from './components/IceBreaker'
 import AgendaRunner from './components/AgendaRunner'
 import MemberShuffle from './components/MemberShuffle'
+import MeetingNotes from './components/MeetingNotes'
 
-type Tab = 'agenda' | 'icebreaker' | 'shuffle'
+type Tab = 'agenda' | 'icebreaker' | 'shuffle' | 'notes'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('agenda')
@@ -39,12 +40,19 @@ export default function App() {
         >
           🔀 シャッフル
         </button>
+        <button
+          className={`tab-btn ${activeTab === 'notes' ? 'tab-active' : ''}`}
+          onClick={() => setActiveTab('notes')}
+        >
+          📝 AI議事録
+        </button>
       </nav>
 
       <main className="app-main">
         {activeTab === 'agenda' && <AgendaRunner />}
         {activeTab === 'icebreaker' && <IceBreaker />}
         {activeTab === 'shuffle' && <MemberShuffle />}
+        {activeTab === 'notes' && <MeetingNotes />}
       </main>
     </div>
   )
