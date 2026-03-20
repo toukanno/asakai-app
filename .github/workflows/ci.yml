@@ -33,14 +33,17 @@ jobs:
           cache: npm
       - run: npm install
       - name: Build Windows installer
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
         run: |
           cd packages/desktop
           npx vite build
-          npx electron-builder --win
+          npx electron-builder --win --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: desktop-windows
           path: packages/desktop/release/*.exe
+          if-no-files-found: warn
 
   build-desktop-mac:
     needs: typecheck-and-build
@@ -53,14 +56,17 @@ jobs:
           cache: npm
       - run: npm install
       - name: Build macOS DMG
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
         run: |
           cd packages/desktop
           npx vite build
-          npx electron-builder --mac
+          npx electron-builder --mac --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: desktop-mac
           path: packages/desktop/release/*.dmg
+          if-no-files-found: warn
 
   build-ios:
     needs: typecheck-and-build
