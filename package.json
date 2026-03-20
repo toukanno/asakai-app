@@ -5,5 +5,15 @@
   "description": "朝会ジェネレーター - Morning Meeting Generator",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint"
+  },
+  "packageManager": "npm@11.9.0",
+  "devDependencies": {
+    "turbo": "^2.8.20"
+  }
 }

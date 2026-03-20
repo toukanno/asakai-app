@@ -1,5 +1,6 @@
 export * from './data/topics'
 export * from './types'
+export * from './platform'
 export * from './hooks/useTimer'
 export * from './hooks/useAgenda'
 export * from './hooks/useIceBreaker'

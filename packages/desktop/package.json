@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview",
     "electron:dev": "vite build && electron ."
   },

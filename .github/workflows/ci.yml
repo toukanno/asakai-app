@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  typecheck-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - run: npx turbo run typecheck
+      - name: Build desktop (Vite only)
+        run: |
+          cd packages/desktop
+          npx vite build
+
+  build-desktop-windows:
+    needs: typecheck-and-build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - name: Build Windows installer
+        run: |
+          cd packages/desktop
+          npx vite build
+          npx electron-builder --win
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-windows
+          path: packages/desktop/release/*.exe
+
+  build-desktop-mac:
+    needs: typecheck-and-build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - name: Build macOS DMG
+        run: |
+          cd packages/desktop
+          npx vite build
+          npx electron-builder --mac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: desktop-mac
+          path: packages/desktop/release/*.dmg
+
+  build-ios:
+    needs: typecheck-and-build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install
+      - name: Install CocoaPods
+        run: |
+          cd packages/mobile/ios
+          pod install
+      - name: Build iOS (simulator)
+        run: |
+          cd packages/mobile/ios
+          xcodebuild -workspace AsakaiMobile.xcworkspace \
+            -scheme AsakaiMobile \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            build

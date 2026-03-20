@@ -5,11 +5,19 @@ release/
 *.local
 .DS_Store
 
+# Turbo
+.turbo/
+
+# Environment (keep .env.example)
+.env
+!.env.example
+!.env.desktop
+!.env.mobile
+
 # React Native
 packages/mobile/ios/Pods/
 packages/mobile/android/.gradle/
 packages/mobile/android/app/build/
-*.xcworkspace
 *.hmap
 *.ipa
 *.dSYM.zip
