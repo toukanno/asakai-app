@@ -34,6 +34,7 @@ export const agendaTemplates = [
   { label: 'アイスブレイク', duration: 3, icon: '🧊' },
   { label: '昨日の振り返り', duration: 5, icon: '📝' },
   { label: '今日のタスク共有', duration: 5, icon: '📋' },
+  { label: '課題共有', duration: 5, icon: '🎯' },
   { label: '困っていること・相談', duration: 5, icon: '🆘' },
   { label: '連絡事項', duration: 3, icon: '📢' },
 ]
