@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import AgendaScreen from './src/screens/AgendaScreen'
 import IceBreakerScreen from './src/screens/IceBreakerScreen'
 import ShuffleScreen from './src/screens/ShuffleScreen'
+import NotesScreen from './src/screens/NotesScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -101,6 +102,17 @@ export default function App() {
               tabBarLabel: 'シャッフル',
               tabBarIcon: ({ focused }) => (
                 <TabIcon label="🔀" focused={focused} />
+              ),
+            }}
+          />
+
+          <Tab.Screen
+            name="Notes"
+            component={NotesScreen}
+            options={{
+              tabBarLabel: '議事録',
+              tabBarIcon: ({ focused }) => (
+                <TabIcon label="📝" focused={focused} />
               ),
             }}
           />
