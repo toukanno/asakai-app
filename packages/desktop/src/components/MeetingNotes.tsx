@@ -8,12 +8,10 @@ export default function MeetingNotes() {
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null)
 
   const checkAndGenerate = async () => {
-    if (aiAvailable === null) {
-      const available = await window.electronAPI.ai.checkAvailable()
-      setAiAvailable(available)
-      if (!available) return
-    }
-    if (!aiAvailable && aiAvailable !== null) return
+    const available =
+      aiAvailable ?? (await window.electronAPI.ai.checkAvailable())
+    if (aiAvailable === null) setAiAvailable(available)
+    if (!available) return
 
     setLoading(true)
     const memberList = members
