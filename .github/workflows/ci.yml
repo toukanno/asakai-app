@@ -21,6 +21,13 @@ jobs:
         run: |
           cd packages/desktop
           npx vite build
+      - name: Build web (Vite)
+        run: npm run build -w @asakai/web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: packages/web/dist
+          if-no-files-found: warn
 
   build-desktop-windows:
     needs: typecheck-and-build

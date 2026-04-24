@@ -10,7 +10,8 @@ Turborepo + npm workspaces のモノレポ構成。
 packages/
 ├── shared/    # 共有データ・ロジック（hooks, types, data）
 ├── desktop/   # Electron デスクトップアプリ（Windows / Mac / Linux）
-└── mobile/    # React Native モバイルアプリ（iOS / Android）
+├── mobile/    # React Native モバイルアプリ（iOS / Android）
+└── web/       # ブラウザ版（Vite SPA + Vercel Functions）
 ```
 
 ## セットアップ
@@ -30,7 +31,17 @@ npm run dev -w @asakai/desktop
 
 # デスクトップビルド
 npm run build -w @asakai/desktop
+
+# ブラウザ版開発（http://localhost:5173）
+npm run dev -w @asakai/web
+
+# ブラウザ版ビルド（packages/web/dist）
+npm run build -w @asakai/web
 ```
+
+## ブラウザ版（Vercel デプロイ）
+
+`packages/web` をルートディレクトリとして Vercel に Import するだけでデプロイできます。詳細は [`packages/web/README.md`](./packages/web/README.md) 参照。AI 機能を使うには `ANTHROPIC_API_KEY` を Vercel の Environment Variables に設定してください。
 
 ## モバイル（React Native）
 
