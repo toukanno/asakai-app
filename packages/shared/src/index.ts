@@ -1,4 +1,5 @@
 export * from './data/topics'
+export * from './data/share'
 export * from './types'
 export * from './platform'
 export * from './hooks/useTimer'

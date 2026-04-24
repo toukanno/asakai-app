@@ -52,4 +52,19 @@ export interface ShuffleState {
 
 export type Platform = 'desktop' | 'mobile' | 'web'
 
+export interface ShareTicket {
+  id: string
+  title: string
+  isNew: boolean
+  inYesterday: boolean
+  yesterdayItems: string
+  inToday: boolean
+  todayItems: string
+}
+
+export interface ShareProject {
+  name: string
+  tickets: ShareTicket[]
+}
+
 export * from './ai'

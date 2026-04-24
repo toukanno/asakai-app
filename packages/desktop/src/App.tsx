@@ -3,8 +3,9 @@ import IceBreaker from './components/IceBreaker'
 import AgendaRunner from './components/AgendaRunner'
 import MemberShuffle from './components/MemberShuffle'
 import MeetingNotes from './components/MeetingNotes'
+import DailyShare from './components/DailyShare'
 
-type Tab = 'agenda' | 'icebreaker' | 'shuffle' | 'notes'
+type Tab = 'agenda' | 'icebreaker' | 'shuffle' | 'notes' | 'share'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('agenda')
@@ -46,6 +47,12 @@ export default function App() {
         >
           📝 AI議事録
         </button>
+        <button
+          className={`tab-btn ${activeTab === 'share' ? 'tab-active' : ''}`}
+          onClick={() => setActiveTab('share')}
+        >
+          📨 共有
+        </button>
       </nav>
 
       <main className="app-main">
@@ -53,6 +60,7 @@ export default function App() {
         {activeTab === 'icebreaker' && <IceBreaker />}
         {activeTab === 'shuffle' && <MemberShuffle />}
         {activeTab === 'notes' && <MeetingNotes />}
+        {activeTab === 'share' && <DailyShare />}
       </main>
     </div>
   )

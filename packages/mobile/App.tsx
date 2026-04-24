@@ -7,6 +7,7 @@ import AgendaScreen from './src/screens/AgendaScreen'
 import IceBreakerScreen from './src/screens/IceBreakerScreen'
 import ShuffleScreen from './src/screens/ShuffleScreen'
 import NotesScreen from './src/screens/NotesScreen'
+import ShareScreen from './src/screens/ShareScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -112,6 +113,16 @@ export default function App() {
               tabBarLabel: 'メモ',
               tabBarIcon: ({ focused }) => (
                 <TabIcon label="📝" focused={focused} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Share"
+            component={ShareScreen}
+            options={{
+              tabBarLabel: '共有',
+              tabBarIcon: ({ focused }) => (
+                <TabIcon label="📨" focused={focused} />
               ),
             }}
           />
