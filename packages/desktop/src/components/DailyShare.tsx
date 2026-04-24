@@ -2,12 +2,19 @@ import { useMemo, useState } from 'react'
 import {
   createTicket,
   generateShareText,
+  usePersistentState,
   type ShareTicket,
 } from '@asakai/shared'
 
 export default function DailyShare() {
-  const [projectName, setProjectName] = useState('介護求人ナビ')
-  const [tickets, setTickets] = useState<ShareTicket[]>([createTicket()])
+  const [projectName, setProjectName] = usePersistentState(
+    'asakai.share.project',
+    '介護求人ナビ'
+  )
+  const [tickets, setTickets] = usePersistentState<ShareTicket[]>(
+    'asakai.share.tickets',
+    [createTicket()]
+  )
   const [copied, setCopied] = useState(false)
 
   const updateTicket = (i: number, patch: Partial<ShareTicket>) => {
@@ -16,6 +23,11 @@ export default function DailyShare() {
   const addTicket = () => setTickets(prev => [...prev, createTicket()])
   const removeTicket = (i: number) =>
     setTickets(prev => prev.filter((_, idx) => idx !== i))
+  const resetAll = () => {
+    if (confirm('入力内容を全て削除します。よろしいですか？')) {
+      setTickets([createTicket()])
+    }
+  }
 
   const preview = useMemo(
     () => generateShareText([{ name: projectName, tickets }], new Date()),
@@ -134,9 +146,14 @@ export default function DailyShare() {
         ))}
       </div>
 
-      <button type="button" className="btn btn-secondary" onClick={addTicket}>
-        ＋ チケット追加
-      </button>
+      <div className="member-controls">
+        <button type="button" className="btn btn-secondary" onClick={addTicket}>
+          ＋ チケット追加
+        </button>
+        <button type="button" className="btn btn-secondary" onClick={resetAll}>
+          🗑 全削除
+        </button>
+      </div>
 
       <div className="share-preview">
         <div className="share-preview-header">

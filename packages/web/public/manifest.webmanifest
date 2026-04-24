@@ -1,0 +1,14 @@
+{
+  "name": "朝会ジェネレーター",
+  "short_name": "朝会",
+  "description": "朝会を効率化するツール — アジェンダ・タイマー・アイスブレイク・シャッフル・共有テンプレ生成",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "ja",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.svg", "sizes": "180x180", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

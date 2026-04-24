@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { usePersistentState } from '@asakai/shared'
 import { aiClient } from '../aiClient'
 
 export default function MeetingNotes() {
-  const [notes, setNotes] = useState('')
-  const [members, setMembers] = useState('')
+  const [notes, setNotes] = usePersistentState('asakai.notes.text', '')
+  const [members, setMembers] = usePersistentState('asakai.notes.members', '')
   const [result, setResult] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [aiAvailable, setAiAvailable] = useState<boolean | null>(null)
