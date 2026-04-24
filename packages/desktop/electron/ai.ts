@@ -18,7 +18,7 @@ function getClient(): Anthropic {
 async function callClaude(systemPrompt: string, userMessage: string): Promise<string> {
   const anthropic = getClient()
   const stream = anthropic.messages.stream({
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-7',
     max_tokens: 1024,
     thinking: { type: 'adaptive' },
     output_config: { effort: 'low' },
